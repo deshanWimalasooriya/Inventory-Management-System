@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supermarket.pos.DashboardController">
+    <left>
+        <VBox styleClass="sidebar" spacing="20">
+            <padding><Insets top="30" right="20" bottom="30" left="20"/></padding>
+            <Label text="SuperPOS" styleClass="brand-logo"/>
+            <Label text="Cashier: Deshan" styleClass="user-greeting"/>
+            <Separator />
+            <Button text="Billing" styleClass="nav-btn active-nav"/>
+            <Button text="Inventory" styleClass="nav-btn" onAction="#openInventoryWindow"/>
+            <Button text="Reports" styleClass="nav-btn"/>
+        </VBox>
+    </left>
+    <center>
+        <VBox spacing="15" styleClass="main-content">
+            <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <Label text="Scan Item:" styleClass="section-title"/>
+                <TextField fx:id="scannerInput" promptText="Waiting for barcode..." styleClass="scanner-input" HBox.hgrow="ALWAYS" onAction="#handleScan"/>
+            </HBox>
+            <TableView fx:id="cartTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn text="Item ID" prefWidth="100"/>
+                    <TableColumn text="Product Name" prefWidth="300"/>
+                    <TableColumn text="Qty" prefWidth="80"/>
+                    <TableColumn text="Unit Price" prefWidth="120"/>
+                    <TableColumn text="Total" prefWidth="120"/>
+                </columns>
+            </TableView>
+            <HBox spacing="20" alignment="CENTER_RIGHT">
+                <Label text="Total Due: " styleClass="total-label"/>
+                <Label fx:id="lblTotalAmount" text="\$0.00" styleClass="total-amount"/>
+                <Button text="Print Bill &amp; Open Drawer" styleClass="checkout-btn" onAction="#processCheckout"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

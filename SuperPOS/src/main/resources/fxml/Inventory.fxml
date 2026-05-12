@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" styleClass="main-content" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supermarket.pos.InventoryController">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <Label text="Current Database Stock" styleClass="section-title"/>
+
+    <TableView fx:id="inventoryTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colBarcode" text="Barcode" prefWidth="120"/>
+            <TableColumn fx:id="colName" text="Product Name" prefWidth="250"/>
+            <TableColumn fx:id="colPrice" text="Unit Price ($)" prefWidth="100"/>
+            <TableColumn fx:id="colStock" text="Current Stock" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <!-- STOCK MANAGEMENT CONTROLS -->
+    <Separator/>
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Label text="Update Stock:" styleClass="section-title"/>
+        <TextField fx:id="txtUpdateBarcode" promptText="Scan or Type Barcode" styleClass="scanner-input"/>
+        <TextField fx:id="txtAddQty" promptText="Qty to Add" prefWidth="100" styleClass="scanner-input"/>
+        <Button text="Add to Inventory" styleClass="checkout-btn" onAction="#handleUpdateStock"/>
+    </HBox>
+</VBox>
