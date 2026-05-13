@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20" stylesheets="@../css/global.css" style="-fx-background-color: #0f172a;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supermarket.pos.LoginController">
+    <VBox alignment="CENTER" spacing="15" style="-fx-background-color: #1e293b; -fx-padding: 40; -fx-background-radius: 12px; -fx-border-color: #334155; -fx-border-radius: 12px;" maxWidth="400">
+        <Label text="SuperPOS" styleClass="brand-logo" style="-fx-font-size: 36px;"/>
+        <Label text="Sign in to continue" style="-fx-text-fill: #94a3b8;"/>
+
+        <TextField fx:id="txtUsername" promptText="Username" styleClass="scanner-input" prefWidth="300"/>
+        <PasswordField fx:id="txtPassword" promptText="Password" styleClass="scanner-input" prefWidth="300" onAction="#handleLogin"/>
+
+        <Label fx:id="lblError" text="" style="-fx-text-fill: #ef4444;"/>
+        <Button text="Login Securely" styleClass="checkout-btn" prefWidth="300" onAction="#handleLogin"/>
+    </VBox>
+</VBox>

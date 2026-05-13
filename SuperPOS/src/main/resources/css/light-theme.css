@@ -1,0 +1,81 @@
+/* --- 1. GLOBAL BACKGROUNDS & TEXT --- */
+.root, .main-content, .scroll-pane > .viewport {
+    -fx-background-color: #f1f5f9;
+}
+.section-title, .brand-logo, .total-amount {
+    -fx-text-fill: #0f172a;
+}
+.user-greeting, .total-label {
+    -fx-text-fill: #475569;
+}
+.separator *.line {
+    -fx-border-color: #cbd5e1;
+}
+
+/* --- 2. SIDEBAR --- */
+.sidebar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 0 1 0 0;
+    -fx-effect: none; /* Removes harsh dark shadows */
+}
+.nav-btn { -fx-text-fill: #475569; }
+.nav-btn:hover {
+    -fx-background-color: #f1f5f9;
+    -fx-text-fill: #0f172a;
+}
+.active-nav {
+    -fx-background-color: #6366f1;
+    -fx-text-fill: #ffffff;
+}
+
+/* --- 3. SETTINGS CARDS & POPUPS --- */
+.settings-card, .dialog-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+}
+.card-title, .dialog-pane .content.label {
+    -fx-text-fill: #0f172a;
+}
+.card-subtitle, .input-label, .custom-checkbox {
+    -fx-text-fill: #475569;
+}
+
+/* --- 4. INPUT FIELDS & COMBOBOXES --- */
+.scanner-input, .combo-box-dark {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-text-fill: #0f172a;
+}
+.scanner-input:focused { -fx-border-color: #6366f1; }
+.combo-box-dark .list-cell { -fx-text-fill: #0f172a; }
+.combo-box-dark .list-view { -fx-background-color: #ffffff; } /* Dropdown list bg */
+
+/* --- 5. PROFESSIONAL DATA TABLES --- */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+}
+.table-view .column-header-background, .table-view .filler {
+    -fx-background-color: #e2e8f0;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #475569;
+}
+.table-view .table-cell {
+    -fx-text-fill: #0f172a;
+    -fx-border-color: transparent transparent #e2e8f0 transparent;
+}
+.table-row-cell { -fx-background-color: #ffffff; }
+.table-row-cell:odd { -fx-background-color: #f8fafc; }
+.table-row-cell:hover { -fx-background-color: #f1f5f9; }
+
+/* --- 6. VISUAL STOCK PRODUCT CARDS --- */
+.product-card {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);
+}
+.product-card-title { -fx-text-fill: #0f172a; -fx-font-size: 16px; -fx-font-weight: bold; }
+.product-card-price { -fx-text-fill: #10b981; -fx-font-size: 14px; -fx-font-weight: bold; }
+.product-card-stock { -fx-text-fill: #64748b; }

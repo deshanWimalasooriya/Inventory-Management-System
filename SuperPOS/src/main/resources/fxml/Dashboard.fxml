@@ -3,38 +3,56 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supermarket.pos.DashboardController">
+<BorderPane fx:id="mainPane" stylesheets="@../css/global.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supermarket.pos.DashboardController">
+
+    <!-- LEFT SIDEBAR -->
     <left>
-        <VBox styleClass="sidebar" spacing="20">
+        <VBox spacing="20" styleClass="sidebar" prefWidth="250">
             <padding><Insets top="30" right="20" bottom="30" left="20"/></padding>
             <Label text="SuperPOS" styleClass="brand-logo"/>
-            <Label text="Cashier: Deshan" styleClass="user-greeting"/>
-            <Separator />
-            <Button text="Billing" styleClass="nav-btn active-nav"/>
-            <Button text="Inventory" styleClass="nav-btn" onAction="#openInventoryWindow"/>
-            <Button text="Reports" styleClass="nav-btn"/>
+            <Label text="Cashier: Deshan" styleClass="user-greeting" style="-fx-padding: 0 0 20 0;"/>
+            <Separator style="-fx-background-color: #334155; -fx-opacity: 0.5;"/>
+
+            <Button fx:id="btnBilling" text="🛒  Billing Counter" styleClass="nav-btn, active-nav" onAction="#showBilling"/>
+            <Button fx:id="btnVisualStock" text="🛍️  Visual Stock" styleClass="nav-btn" onAction="#showVisualStock"/>
+            <Button fx:id="btnInventory" text="📦  Database Entry" styleClass="nav-btn" onAction="#showInventory"/>
+            <Button fx:id="btnReports" text="📊  Sales Reports" styleClass="nav-btn" onAction="#showReports"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button fx:id="btnSettings" text="⚙️  System Settings" styleClass="nav-btn" onAction="#showSettings"/>
         </VBox>
     </left>
+
+    <!-- CENTER CONTENT (BILLING VIEW) -->
     <center>
-        <VBox spacing="15" styleClass="main-content">
-            <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
+        <VBox spacing="20" styleClass="main-content">
+            <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+
             <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label text="Scan Item:" styleClass="section-title"/>
-                <TextField fx:id="scannerInput" promptText="Waiting for barcode..." styleClass="scanner-input" HBox.hgrow="ALWAYS" onAction="#handleScan"/>
+                <Label text="Active Transaction" styleClass="section-title"/>
+                <Region HBox.hgrow="ALWAYS" />
+                <TextField fx:id="scannerInput" promptText="🔍 Scan or type barcode..." styleClass="scanner-input" prefWidth="350" onAction="#handleScan"/>
+                <Button text="⌨️ Manual Search" styleClass="checkout-btn" style="-fx-background-color: #3b82f6; -fx-padding: 10 15; -fx-font-size: 14px;" onAction="#openManualSearch"/>
             </HBox>
-            <TableView fx:id="cartTable" VBox.vgrow="ALWAYS">
+
+            <TableView fx:id="cartTable" VBox.vgrow="ALWAYS" style="-fx-font-size: 14px;">
                 <columns>
-                    <TableColumn text="Item ID" prefWidth="100"/>
-                    <TableColumn text="Product Name" prefWidth="300"/>
-                    <TableColumn text="Qty" prefWidth="80"/>
-                    <TableColumn text="Unit Price" prefWidth="120"/>
-                    <TableColumn text="Total" prefWidth="120"/>
+                    <TableColumn fx:id="colId" text="Barcode ID" prefWidth="150" />
+                    <TableColumn fx:id="colName" text="Product Name" prefWidth="300" />
+                    <TableColumn fx:id="colPrice" text="Unit Price ($)" prefWidth="120" />
+                    <TableColumn fx:id="colQty" text="Quantity" prefWidth="100" />
+                    <TableColumn fx:id="colTotal" text="Line Total ($)" prefWidth="120" />
+                    <TableColumn fx:id="colAction" text="Remove" prefWidth="80" />
                 </columns>
             </TableView>
-            <HBox spacing="20" alignment="CENTER_RIGHT">
-                <Label text="Total Due: " styleClass="total-label"/>
+
+            <HBox alignment="CENTER_RIGHT" spacing="30" style="-fx-padding: 20 0 0 0; -fx-border-color: #334155; -fx-border-width: 1 0 0 0;">
+                <VBox alignment="CENTER_RIGHT" spacing="5">
+                    <Label fx:id="lblTax" text="Tax (8%): $0.00" style="-fx-text-fill: #94a3b8; -fx-font-size: 16px;"/>
+                    <Label text="Total Amount:" style="-fx-text-fill: #94a3b8; -fx-font-size: 18px;"/>
+                </VBox>
                 <Label fx:id="lblTotalAmount" text="\$0.00" styleClass="total-amount"/>
-                <Button text="Print Bill &amp; Open Drawer" styleClass="checkout-btn" onAction="#processCheckout"/>
+                <Button text="Complete Checkout" styleClass="checkout-btn" onAction="#processCheckout"/>
             </HBox>
         </VBox>
     </center>

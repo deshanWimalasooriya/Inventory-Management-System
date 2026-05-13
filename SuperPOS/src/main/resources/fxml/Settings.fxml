@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<!-- Note the transparent background to fix the white border bug! -->
+<ScrollPane fitToWidth="true" style="-fx-background: #0f172a; -fx-background-color: transparent;" stylesheets="@../css/global.css, @../css/settings.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supermarket.pos.SettingsController">
+    <VBox spacing="25" styleClass="main-content">
+        <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+
+        <Label text="System Settings" styleClass="section-title" style="-fx-font-size: 28px;"/>
+        <Label text="Configure your store details, financials, security, and preferences." style="-fx-text-fill: #94a3b8;"/>
+        <Separator style="-fx-background-color: #334155; -fx-opacity: 0.5;"/>
+
+        <!-- ROW 1: Store & Financial Settings -->
+        <HBox spacing="25">
+            <!-- STORE DETAILS -->
+            <VBox spacing="15" styleClass="settings-card" HBox.hgrow="ALWAYS">
+                <Label text="🏪 Store Details" styleClass="card-title"/>
+                <Label text="These details appear on customer receipts." styleClass="card-subtitle"/>
+                <VBox spacing="5">
+                    <Label text="Store Name" styleClass="input-label"/>
+                    <TextField fx:id="txtStoreName" promptText="e.g., SuperPOS Mart" styleClass="scanner-input"/>
+                </VBox>
+                <VBox spacing="5">
+                    <Label text="Store Address" styleClass="input-label"/>
+                    <TextField fx:id="txtAddress" promptText="123 Main St, City" styleClass="scanner-input"/>
+                </VBox>
+                <VBox spacing="5">
+                    <Label text="Contact Number" styleClass="input-label"/>
+                    <TextField fx:id="txtPhone" promptText="(555) 123-4567" styleClass="scanner-input"/>
+                </VBox>
+            </VBox>
+
+            <!-- FINANCIAL SETTINGS -->
+            <VBox spacing="15" styleClass="settings-card" HBox.hgrow="ALWAYS">
+                <Label text="💰 Financial Configuration" styleClass="card-title"/>
+                <Label text="Manage taxes and currency." styleClass="card-subtitle"/>
+                <VBox spacing="5">
+                    <Label text="Default Tax Rate (%)" styleClass="input-label"/>
+                    <TextField fx:id="txtTaxRate" promptText="e.g., 8.0" styleClass="scanner-input"/>
+                </VBox>
+                <VBox spacing="5">
+                    <Label text="Currency Symbol" styleClass="input-label"/>
+                    <ComboBox fx:id="comboCurrency" styleClass="combo-box-dark" prefWidth="150">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="$ (USD)"/>
+                                <String fx:value="€ (EUR)"/>
+                                <String fx:value="£ (GBP)"/>
+                                <String fx:value="Rs (LKR)"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                </VBox>
+                <Region VBox.vgrow="ALWAYS"/>
+                <CheckBox fx:id="chkPrintReceipt" text="Automatically print receipt after checkout" styleClass="custom-checkbox"/>
+            </VBox>
+        </HBox>
+
+        <!-- ROW 2: UI Theme & Personal Security -->
+        <HBox spacing="25">
+            <!-- UI & BRANDING CARD -->
+            <VBox spacing="15" styleClass="settings-card" HBox.hgrow="ALWAYS">
+                <Label text="🎨 Theme &amp; Branding" styleClass="card-title"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="App Theme:" styleClass="input-label" prefWidth="100"/>
+                    <ComboBox fx:id="comboTheme" styleClass="combo-box-dark" onAction="#handleThemeChange">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Dark Mode"/>
+                                <String fx:value="Light Mode"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Market Logo:" styleClass="input-label" prefWidth="100"/>
+                    <Button text="Upload New Logo" styleClass="nav-btn" style="-fx-border-color: #334155; -fx-border-radius: 8px;" onAction="#changeLogo"/>
+                    <Label fx:id="lblLogoStatus" text="" style="-fx-text-fill: #10b981;"/>
+                </HBox>
+            </VBox>
+
+            <!-- SECURITY CARD -->
+            <VBox spacing="15" styleClass="settings-card" HBox.hgrow="ALWAYS">
+                <Label text="🔐 Security Profile" styleClass="card-title"/>
+                <Label fx:id="lblCurrentUser" text="Logged in as: " styleClass="card-subtitle"/>
+                <HBox spacing="10">
+                    <PasswordField fx:id="txtNewPass" promptText="Enter New Password" styleClass="scanner-input" HBox.hgrow="ALWAYS"/>
+                    <Button text="Update Password" styleClass="checkout-btn" onAction="#updatePassword" style="-fx-font-size: 14px; -fx-padding: 10 15;"/>
+                </HBox>
+            </VBox>
+        </HBox>
+
+        <!-- ROW 3: ADMIN ONLY PANEL -->
+        <VBox fx:id="adminPanel" spacing="25" styleClass="settings-card" style="-fx-border-color: #6366f1; -fx-border-width: 2px;">
+            <VBox spacing="10">
+                <Label text="🛡️ Admin Control Center" styleClass="card-title" style="-fx-text-fill: #6366f1;"/>
+                <Label text="Manage employees and database backups." styleClass="card-subtitle"/>
+            </VBox>
+
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <TextField fx:id="txtNewUsername" promptText="New Employee Username" styleClass="scanner-input" prefWidth="200"/>
+                <PasswordField fx:id="txtNewUserPass" promptText="Temporary Password" styleClass="scanner-input" prefWidth="200"/>
+                <ComboBox fx:id="comboRole" styleClass="combo-box-dark" promptText="Select Role" prefWidth="150">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Admin"/>
+                            <String fx:value="Cashier"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <Button text="+ Create User" styleClass="checkout-btn" style="-fx-background-color: #3b82f6;" onAction="#createNewUser"/>
+            </HBox>
+
+            <Separator style="-fx-background-color: #334155; -fx-opacity: 0.5;"/>
+
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <Button text="💾 Backup Database" styleClass="nav-btn" style="-fx-border-color: #334155; -fx-border-radius: 8px; -fx-text-fill: #6366f1;" onAction="#handleBackup"/>
+                <Button text="⚠️ Factory Reset" styleClass="danger-btn" onAction="#handleFactoryReset"/>
+            </HBox>
+        </VBox>
+
+        <!-- SAVE ALL SETTINGS BUTTON -->
+        <HBox alignment="CENTER_RIGHT" style="-fx-padding: 10 0 0 0;">
+            <Label fx:id="lblSaveStatus" text="" style="-fx-text-fill: #10b981; -fx-font-weight: bold; -fx-padding: 0 20 0 0;"/>
+            <Button text="Save Global Settings" styleClass="checkout-btn" style="-fx-font-size: 18px;" onAction="#saveGlobalSettings"/>
+        </HBox>
+
+    </VBox>
+</ScrollPane>
