@@ -1,0 +1,7 @@
+/* --- INVENTORY SPECIFIC STYLES --- */
+/* (Main table styles are handled in global.css) */
+
+.low-stock-warning {
+    -fx-text-fill: #ef4444;
+    -fx-font-weight: bold;
+}

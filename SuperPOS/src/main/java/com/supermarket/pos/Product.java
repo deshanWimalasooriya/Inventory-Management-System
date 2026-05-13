@@ -5,17 +5,19 @@ public class Product {
     private String name;
     private double price;
     private int stock;
+    private String imagePath;
 
-    public Product(String barcode, String name, double price, int stock) {
+    public Product(String barcode, String name, double price, int stock, String imagePath) {
         this.barcode = barcode;
         this.name = name;
         this.price = price;
         this.stock = stock;
+        this.imagePath = imagePath;
     }
 
-    // Getters for the UI table to use
     public String getBarcode() { return barcode; }
     public String getName() { return name; }
     public double getPrice() { return price; }
     public int getStock() { return stock; }
+    public String getImagePath() { return imagePath; }
 }

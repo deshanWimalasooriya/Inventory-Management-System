@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<HBox styleClass="main-content" stylesheets="@../css/global.css, @../css/visual-stock.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supermarket.pos.VisualStockController">
+
+    <!-- LEFT SIDE: The Visual Grid -->
+    <VBox spacing="25" HBox.hgrow="ALWAYS">
+        <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+        <HBox spacing="15" alignment="CENTER_LEFT">
+            <Label text="Visual Grid Filter:" styleClass="section-title"/>
+            <ComboBox fx:id="filterComboBox" onAction="#applyFilters" style="-fx-background-color: #1e293b; -fx-text-fill: white;">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="All Items" />
+                        <String fx:value="In Stock" />
+                        <String fx:value="Out of Stock" />
+                    </FXCollections>
+                </items>
+                <value><String fx:value="All Items" /></value>
+            </ComboBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <!-- The Button that opens the panel -->
+            <Button text="+ Add New Item" styleClass="checkout-btn" style="-fx-background-color: #6366f1;" onAction="#openAddForm"/>
+        </HBox>
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="scroll-pane">
+            <FlowPane fx:id="gridPane" hgap="20" vgap="20" />
+        </ScrollPane>
+    </VBox>
+
+    <!-- RIGHT SIDE: The Sliding Form Panel (Hidden by default) -->
+    <VBox fx:id="addFormPanel" spacing="15" prefWidth="320" style="-fx-background-color: #1e293b; -fx-border-color: #334155; -fx-border-width: 0 0 0 1;" managed="false" visible="false">
+        <padding><Insets top="30" right="25" bottom="30" left="25"/></padding>
+
+        <Label text="Add New Product" styleClass="section-title" style="-fx-font-size: 20px;"/>
+        <Separator style="-fx-background-color: #334155; -fx-opacity: 0.5;"/>
+
+        <TextField fx:id="txtBarcode" promptText="Barcode (e.g., 1001)" styleClass="scanner-input"/>
+        <TextField fx:id="txtName" promptText="Product Name" styleClass="scanner-input"/>
+        <TextField fx:id="txtPrice" promptText="Unit Price (e.g., 15.99)" styleClass="scanner-input"/>
+        <TextField fx:id="txtStock" promptText="Initial Stock Qty" styleClass="scanner-input"/>
+
+        <Label text="Product Image:" style="-fx-text-fill: #94a3b8;"/>
+        <HBox spacing="10">
+            <TextField fx:id="txtImagePath" promptText="Image Path" styleClass="scanner-input" HBox.hgrow="ALWAYS" editable="false"/>
+            <Button text="Browse" onAction="#browseImage" styleClass="checkout-btn" style="-fx-padding: 10 15; -fx-font-size: 13px; -fx-background-color: #334155;"/>
+        </HBox>
+
+        <Region VBox.vgrow="ALWAYS"/>
+
+        <Button text="Save Product" styleClass="checkout-btn" maxWidth="Infinity" onAction="#saveNewProduct"/>
+        <!-- A ghost button for Cancel -->
+        <Button text="Cancel" styleClass="nav-btn" maxWidth="Infinity" style="-fx-alignment: CENTER; -fx-border-color: #334155; -fx-border-radius: 8px;" onAction="#closeAddForm"/>
+    </VBox>
+
+</HBox>

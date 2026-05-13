@@ -1,0 +1,21 @@
+/* --- BILLING TOTALS & CART ACTIONS --- */
+.total-label {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 18px;
+}
+.total-amount {
+    -fx-text-fill: #10b981;
+    -fx-font-size: 32px;
+    -fx-font-weight: 900;
+}
+.cancel-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: #ef4444;
+    -fx-border-radius: 8px;
+    -fx-text-fill: #ef4444;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+.cancel-btn:hover {
+    -fx-background-color: rgba(239, 68, 68, 0.1);
+}
